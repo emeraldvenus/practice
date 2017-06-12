@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.kayak.mybatis.inter.IUserOperation">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+    User类就是users表所对应的实体类
+    -->
+    <!-- 
+        根据id查询得到一个user对象
+     -->
+    <resultMap  id="BaseResultMap" type="com.kayak.domain.User">
+		<id column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="userName" jdbcType="CHAR" />
+		<result column="USER_PASSWORD" property="userPassword" jdbcType="CHAR" />
+		<result column="USER_EMAIL" property="userEmail" jdbcType="CHAR" />
+	</resultMap>
+	<!-- 查询单条记录 -->
+	<select id="getUserById" parameterType="int" resultMap="BaseResultMap">
+		SELECT * FROM t_user WHERE USER_ID = #{userId}
+	</select>
+	<!-- 查询所有记录 -->
+	<select id="getAllUser"  resultMap="BaseResultMap">
+		SELECT * FROM t_user
+	</select>
+	<!-- 根据姓名查询记录 -->
+    <select id="getUserByName" parameterType="string" resultMap="BaseResultMap">
+        select * from t_user where USER_NAME like #{userName}
+    </select>
+    <!-- 插入记录 -->
+    <insert id="addUser" parameterType="com.kayak.domain.User" 
+        useGeneratedKeys="true" keyProperty="userId"> 
+        insert into t_user(user_name,user_password,user_email)  
+             values(#{userName},#{userPassword},#{userEmail})  
+    </insert>
+</mapper>
