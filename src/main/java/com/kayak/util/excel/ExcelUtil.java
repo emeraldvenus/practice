@@ -76,7 +76,7 @@ public class ExcelUtil {
 		return null;
 	}
 	public static void main(String[] args) {
-		String filePath = "F:\\Work\\kayak\\其他\\excelPractice.xls";
+		String filePath = "D:/kkdev/project/practice/excelPractice.xls";
 		ArrayList readExcel = readExcel(filePath);
 		for(int i = 0;i<readExcel.size();i++){
 			System.out.println(readExcel.get(i));

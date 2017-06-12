@@ -29,7 +29,7 @@ public class ExcelOperation {
 	private static Logger logger = Logger.getLogger(ExcelOperation.class);
 
 	public void readExcel() {
-		String file_address = "F:\\Work\\kayak\\其他\\excelPractice.xls";// excel地址
+		String file_address = "D:/kkdev/project/practice/excelPractice.xls";// excel地址
 		String table_name = "";// 操作的表名
 		try {
 			logger.info("开始解析excel");
